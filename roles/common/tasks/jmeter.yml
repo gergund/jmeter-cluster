@@ -1,0 +1,28 @@
+---
+
+  - name: install java
+    yum: name=java-1.7.0-openjdk.x86_64 state=present
+
+  - name: create dir to install jmeter
+    file: path=/opt/jmeter state=directory    
+
+  - name: download jmeter
+    get_url: url=http://download.nextag.com/apache//jmeter/binaries/apache-jmeter-2.13.tgz dest=/opt/jmeter/jmeter.tar.gz
+
+  - name: extract jmeter to dir
+    unarchive: src=/opt/jmeter/jmeter.tar.gz dest=/opt/jmeter
+
+  - name: create link to current jmeter version
+    file: src=/opt/jmeter/apache-jmeter-2.13 dest=/opt/jmeter/current state=link
+
+  - name: download Jmeter Plugins - Standard
+    get_url: url=http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-1.2.1.zip dest=/opt/jmeter
+
+  - name: extract Jmeter Plugins - Standard
+    unarchive: src=/opt/jmeter/JMeterPlugins-Standard-1.2.1.zip dest=/opt/jmeter/current
+
+  - name: download Jmeter Plugins - Extras
+    get_url: url=http://jmeter-plugins.org/downloads/file/JMeterPlugins-Extras-1.2.1.zip dest=/opt/jmeter
+
+  - name: extract Jmeter Plugins - Extras
+    unarchive: src=/opt/jmeter/JMeterPlugins-Extras-1.2.1.zip dest=/opt/jmeter/current

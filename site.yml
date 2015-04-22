@@ -1,0 +1,12 @@
+---
+- hosts: all
+  roles:
+     - common
+
+- hosts: slave
+  roles:
+     - slave
+
+#- hosts: master
+#  roles:
+#     - master 
