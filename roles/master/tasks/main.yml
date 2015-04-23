@@ -1,0 +1,12 @@
+---
+- name: get ip for master
+  shell: curl --request GET 'http://my.itwnik.com/lab/jmeter-register.php?cluster_id={{ cluster_id }}&list=true' > /tmp/slave_ip.log
+
+- name: configure Jmeter master
+  template: src=jmeter.properties.j2 dest=/opt/jmeter/current/bin/jmeter.properties
+
+- name: set list of slaves to Jmeter master config
+  shell: cat /tmp/slave_ip.log >> /opt/jmeter/current/bin/jmeter.properties
+  args:
+     creates: /opt/jmeter/current/bin/jmeter.properties.lock
+  

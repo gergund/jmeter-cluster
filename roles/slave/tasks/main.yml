@@ -2,7 +2,10 @@
  - name: Configure jmeter-server
    template: src=jmeter-server.j2 dest=/opt/jmeter/current/bin/jmeter-server mode="u=rwx,g=rx,o=rx"
 
+ - name: register internal ip for master
+   command: curl --request GET 'http://my.itwnik.com/lab/jmeter-register.php?&cluster_id={{ cluster_id }}&slave_ip={{ ansible_eth0.ipv4.address }}'
+
  - name: Run Jmeter-server instance
    shell: cd /opt/jmeter/current/bin/ && /opt/jmeter/current/bin/jmeter-server & >> /opt/jmeter/current/bin/jmeter-server.log && touch /opt/jmeter/current/bin/jmeter.lock
    args:
-     creates:  /opt/jmeter/current/bin/jmeter.lock
+     creates: /opt/jmeter/current/bin/jmeter.lock

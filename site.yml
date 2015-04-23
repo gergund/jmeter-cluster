@@ -7,6 +7,6 @@
   roles:
      - slave
 
-#- hosts: master
-#  roles:
-#     - master 
+- hosts: master
+  roles:
+     - master 
